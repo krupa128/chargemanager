@@ -41,12 +41,9 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
 
-        // 🔹 Generate token using username (Not entire User object)
+        // ð¹ Generate token using username (Not entire User object)
         String token = jwtService.generateToken(user.get().getUsername());
 
         return ResponseEntity.ok(new AuthResponse(token));
     }
 }
-//INSERT INTO users (id, username, password) VALUES (1, 'chandu', '$2a$10$S723x4jEXUejeFEBN/IJu.Gb7eCY09gTILJnS556g0AMonNvWZc6i');
-
-//select * from users
