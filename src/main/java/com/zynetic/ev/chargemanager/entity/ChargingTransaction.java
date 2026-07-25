@@ -27,8 +27,9 @@ public class ChargingTransaction {
     @JoinColumn(name = "charger_id", nullable = false)
     private Charger charger;
 
+    // Nullable: idTag from the charger doesn't always correspond to a registered User
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)  // 🔹 Linking transactions to users
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @Column(nullable = false)
