@@ -18,51 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-//    private final UserDetailsService userDetailsService;
-//
-//    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsService userDetailsService) {
-//        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-//        this.userDetailsService = userDetailsService;
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/auth/**")) // ✅ Allow login requests without CSRF
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/auth/**").permitAll() // ✅ Allow authentication endpoints
-//                        .anyRequest().authenticated() // ✅ Secure all other endpoints
-//                )
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public AuthenticationManager authenticationManager() {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setPasswordEncoder(passwordEncoder());
-//        return new ProviderManager(provider);
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//}
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final JwtService jwtService;
-    private final CustomUserDetailsService userDetailsService; // ✅ Inject UserDetailsService
+    private final CustomUserDetailsService userDetailsService; // â Inject UserDetailsService
 
     public SecurityConfig(JwtService jwtService, CustomUserDetailsService userDetailsService) {
         this.jwtService = jwtService;
@@ -94,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService); // ✅ Use CustomUserDetailsService
+        provider.setUserDetailsService(userDetailsService); // â Use CustomUserDetailsService
         provider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(provider);
     }
